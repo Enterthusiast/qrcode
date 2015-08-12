@@ -1,6 +1,6 @@
 /*
    Copyright 2011 Lazar Laszlo (lazarsoft@gmail.com, www.lazarsoft.info)
-   
+
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
    You may obtain a copy of the License at
@@ -32,8 +32,8 @@ qrcode.decode = function(width, height, imageData){
     qrcode.width = width;
     qrcode.height = height;
     qrcode.imagedata = imageData;
- 
-    return qrcode.process();   
+
+    return qrcode.process();
 }
 
 qrcode.isUrl = function(s)
@@ -74,13 +74,13 @@ qrcode.decode_utf8 = function ( s )
 }
 
 qrcode.process = function(){
-    
+
     var image = qrcode.grayScaleToBitmap(qrcode.grayscale());
     var detector = new Detector(image);
 
     var qRCodeMatrix = detector.detect();
 
-    
+
     var reader = Decoder.decode(qRCodeMatrix.bits);
     var data = reader.DataByte;
     var str="";
@@ -89,7 +89,7 @@ qrcode.process = function(){
         for(var j=0;j<data[i].length;j++)
             str+=String.fromCharCode(data[i][j]);
     }
-    
+
     return qrcode.decode_utf8(str);
 }
 
@@ -112,7 +112,7 @@ qrcode.binarize = function(th){
         for (var x = 0; x < qrcode.width; x++)
         {
             var gray = qrcode.getPixel(x, y);
-            
+
             ret[x+y*qrcode.width] = gray<=th?true:false;
         }
     }
@@ -168,7 +168,7 @@ qrcode.getMiddleBrightnessPerArea=function(image)
         //Console.out.println("");
     }
     //Console.out.println("");
-    
+
     return middle;
 }
 
@@ -179,7 +179,7 @@ qrcode.grayScaleToBitmap=function(grayScale)
     var areaWidth = Math.floor(qrcode.width / sqrtNumArea);
     var areaHeight = Math.floor(qrcode.height / sqrtNumArea);
     var bitmap = new Array(qrcode.height*qrcode.width);
-    
+
     for (var ay = 0; ay < sqrtNumArea; ay++)
     {
         for (var ax = 0; ax < sqrtNumArea; ax++)
@@ -203,7 +203,7 @@ qrcode.grayscale = function(){
         for (var x = 0; x < qrcode.width; x++)
         {
             var gray = qrcode.getPixel(x, y);
-            
+
             ret[x+y*qrcode.width] = gray;
         }
     }
